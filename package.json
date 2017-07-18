@@ -1,0 +1,98 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "dcg-angular2-forms@0.0.7",
+        "scope": null,
+        "escapedName": "dcg-angular2-forms",
+        "name": "dcg-angular2-forms",
+        "rawSpec": "0.0.7",
+        "spec": "0.0.7",
+        "type": "version"
+      },
+      "/media/datos/daniel/Desarrollo/zaperin"
+    ]
+  ],
+  "_from": "dcg-angular2-forms@0.0.7",
+  "_id": "dcg-angular2-forms@0.0.7",
+  "_inCache": true,
+  "_location": "/dcg-angular2-forms",
+  "_nodeVersion": "7.10.0",
+  "_npmUser": {},
+  "_npmVersion": "4.6.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "dcg-angular2-forms@0.0.7",
+    "scope": null,
+    "escapedName": "dcg-angular2-forms",
+    "name": "dcg-angular2-forms",
+    "rawSpec": "0.0.7",
+    "spec": "0.0.7",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "http://npm.soleydani.es:18780/dcg-angular2-forms/-/dcg-angular2-forms-0.0.7.tgz",
+  "_shasum": "89afca0bec6eb300da3b3bea5d5a51506110b6de",
+  "_shrinkwrap": null,
+  "_spec": "dcg-angular2-forms@0.0.7",
+  "_where": "/media/datos/daniel/Desarrollo/zaperin",
+  "dependencies": {},
+  "devDependencies": {
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/http": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "@angular/upgrade": "~4.0.0",
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.45",
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
+    "typescript": "^2.0.10"
+  },
+  "dist": {
+    "shasum": "89afca0bec6eb300da3b3bea5d5a51506110b6de",
+    "tarball": "http://npm.soleydani.es:18780/dcg-angular2-forms/-/dcg-angular2-forms-0.0.7.tgz"
+  },
+  "gitHead": "5d1c1964f10d761b5e5cde73298908001dfb7130",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+    }
+  ],
+  "name": "dcg-angular2-forms",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/http": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "@angular/upgrade": "~4.0.0",
+    "angular-in-memory-web-api": "~0.1.15",
+    "core-js": "^2.4.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.8",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "zone.js": "^0.6.25"
+  },
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "lite": "lite-server",
+    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "version": "0.0.7"
+}

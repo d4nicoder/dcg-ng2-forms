@@ -1,0 +1,43 @@
+div.cajaDatePicker {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 35px;
+    border-radius: 2px;
+    font-size:0.9em;
+}
+
+tr.cabeceraTablaDatepicker {
+    cursor:pointer;
+    text-align:center;
+    border: none;
+    background-color: #1b517c;
+    color:white;
+    border-radius: 2px 2px 0 0;
+}
+
+td.diaFechaDatePicker {
+    border-radius: 25px;
+    border:none;
+    width: 50px;
+    height: 50px;
+    text-align:center;
+    vertical-align: middle;
+    cursor:pointer;
+    border: none;
+}
+
+td.diaActivo {
+    background-color: #1b517c;
+    color:white;
+}
+
+td.diaFechaDatePicker:hover {
+    background-color: #1b517c;
+    color:white;
+}
+
+td.diaFechaDatePicker.activo {
+    background-color: #1b517c;
+    color:white;
+}
