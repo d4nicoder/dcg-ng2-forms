@@ -58,7 +58,7 @@ export class DatepickerComponent implements OnInit {
     }
 
     anoChange($event: any) {
-        console.log("Cambia el año");
+
     }
 
     diasEnMes() {
@@ -187,8 +187,6 @@ export class DatepickerComponent implements OnInit {
         }
 
         let dias = this.diasEnMes();
-
-        console.log(dias + " != " + this.dia);
 
         this.dia = (this.dia <= dias) ? this.dia : dias;
 

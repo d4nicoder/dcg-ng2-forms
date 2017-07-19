@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class InputQueryService {
     constructor(private http: Http) {
-        
+
     }
 
     consultar(url: string, query: any): Observable<any> {

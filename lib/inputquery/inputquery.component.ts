@@ -17,6 +17,10 @@ export class InputQueryComponent implements AfterViewInit {
 
 	resultados: Array<any> = [];
 
+	estiloCuadro: any = {};
+
+	estilosItem: Array<any> = [];
+
 	@Input() multiple: boolean = false;
 	@Input() realtime: boolean = false;
 	@Input() url: string;
@@ -55,18 +59,17 @@ export class InputQueryComponent implements AfterViewInit {
 
 	getEstilo() {
 		if (!this.capa) {
-			return {display: 'none'};
+			this.estiloCuadro = {display: 'none'};
+			return;
 		}
 
 		let altoInput = this.capa.offsetHeight;
 		let ancho = (this.capa.offsetWidth >= 200) ? this.capa.offsetWidth : 200;
 
 		// En caso de que el input está muy por debajo de la pantalla,
-		// debemos mostrar el cuadro por encima 
+		// debemos mostrar el cuadro por encima
 		const posFromTop: number = this.position.top + altoInput;
 
-		console.log(window.innerHeight);
-		console.log(posFromTop);
 		let obj: any;
 
 		if (window.innerHeight - posFromTop < 250 && posFromTop > 250) {
@@ -98,21 +101,24 @@ export class InputQueryComponent implements AfterViewInit {
 			};
 		}
 
-		return obj;
+		this.estiloCuadro = obj;
 	}
 
-	public getEstiloItem(item:any): any {
+	private calculaEstilosItem(): any {
+		this.estilosItem = [];
 
-		if (item === this.preSeleccion) {
-			return {
-				cursor: 'pointer',
-				'background-color': 'darkred',
-				color: 'white'
-			};
-		} else {
-			return {
-				cursor: 'pointer'
-			};
+		for (let i = 0; i < this.resultados.length; i++) {
+			if (this.preSeleccion === this.resultados[i]) {
+				this.estilosItem[i] = {
+					cursor: 'pointer',
+					'background-color': 'darkred',
+					color: 'white'
+				}
+			} else {
+				this.estilosItem[i] = {
+					cursor: 'pointer'
+				}
+			}
 		}
 	}
 
@@ -127,16 +133,15 @@ export class InputQueryComponent implements AfterViewInit {
 	}
 
 	onKey($event: any) {
+		this.getEstilo();
 		this.position = this.cumulativeOffset($event.target);
 		this.texto = $event.target.value.toUpperCase();
 		this.capa = $event.target;
-		
+
 		this.position.top = this.position.top - window.scrollY;
 		this.position.left = this.position.left - window.scrollX;
 
-		console.log(this.position);
 
-		
 		if ($event.keyCode === 40) {
 			$event.preventDefault();
 			this.moveDown();
@@ -181,7 +186,7 @@ export class InputQueryComponent implements AfterViewInit {
 
 	buscar() {
 		if (!this.url || this.url === "") {
-			console.error("No hay url para buscar");
+
 			return;
 		}
 
@@ -207,9 +212,11 @@ export class InputQueryComponent implements AfterViewInit {
 				if (this.resultados.length === 1 && !this.realtime) {
 					this.seleccionar(this.resultados[0]);
 				}
+
+				this.calculaEstilosItem();
 			},
 			(err) => {
-				console.error("Error en la consulta");
+
 				this.resultados = [];
 			})
 	}
@@ -222,6 +229,8 @@ export class InputQueryComponent implements AfterViewInit {
 		}
 
 		this.preSeleccion = this.resultados[this.numPreseleccion];
+
+		this.calculaEstilosItem();
 	}
 
 	moveDown() {
@@ -232,6 +241,8 @@ export class InputQueryComponent implements AfterViewInit {
 		}
 
 		this.preSeleccion = this.resultados[this.numPreseleccion];
+
+		this.calculaEstilosItem();
 	}
 
 	seleccionar(resultado: any) {
