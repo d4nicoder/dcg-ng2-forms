@@ -133,7 +133,6 @@ export class InputQueryComponent implements AfterViewInit {
 	}
 
 	onKey($event: any) {
-		this.getEstilo();
 		this.position = this.cumulativeOffset($event.target);
 		this.texto = $event.target.value.toUpperCase();
 		this.capa = $event.target;
@@ -212,7 +211,7 @@ export class InputQueryComponent implements AfterViewInit {
 				if (this.resultados.length === 1 && !this.realtime) {
 					this.seleccionar(this.resultados[0]);
 				}
-
+				this.getEstilo();
 				this.calculaEstilosItem();
 			},
 			(err) => {
