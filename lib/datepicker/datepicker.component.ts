@@ -24,9 +24,6 @@ export class DatepickerComponent implements OnInit {
 
 	public trimestres: Array<any> = [];
 
-    //public mesAnterior: Date;
-    //public mesSiguiente: Date;
-
     public mesSig: Date;
     public mesAnt: Date;
 
@@ -35,6 +32,9 @@ export class DatepickerComponent implements OnInit {
     @ViewChild('boton') boton;
 
     ngOnInit() {
+		this.view = (typeof this.view !== 'string') ? 'dia' : this.view;
+		this.view = (this.view.match(/^(dia|mes|ano)$/)) ? this.view : 'dia';
+
         if (!this.date || this.date === null) {
             this.date = null;
             this.dateChange.emit(null);
@@ -49,10 +49,6 @@ export class DatepickerComponent implements OnInit {
         this.ano = this.date.getFullYear();
         this.mes = this.date.getMonth();
         this.dia = this.date.getDate();
-
-
-		this.view = (typeof this.view !== 'string') ? 'dia' : this.view;
-		this.view = (this.view.match(/^(dia|mes|ano)$/)) ? this.view : 'dia';
 
         // Ahora debemos calcular la vista del mes
         this.aplicar();
