@@ -1,6 +1,6 @@
 {
   "name": "dcg-ng2-forms",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Módulo para angular2 con componentes de formularios (datepicker, input-query...)",
   "main": "index.ts",
   "directories": {
