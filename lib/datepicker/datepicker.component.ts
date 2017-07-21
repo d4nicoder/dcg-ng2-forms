@@ -94,7 +94,7 @@ export class DatepickerComponent implements OnInit {
 
 			this.trimestres[i].push({
 				valor: fecha,
-				texto: nom[m];
+				texto: nom[m]
 			});
 		}
 	}
