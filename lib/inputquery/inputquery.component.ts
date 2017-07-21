@@ -192,7 +192,8 @@ export class InputQueryComponent implements AfterViewInit {
 		this.visible = true;
 
 		if (typeof this.texto !== 'string' || this.texto.trim().length === 0) {
-			this.visible = false;
+			//this.visible = false;
+			this.borrar();
 			return;
 		}
 

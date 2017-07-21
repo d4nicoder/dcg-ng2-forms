@@ -14,12 +14,15 @@ export class DatepickerComponent implements OnInit {
     @Input() date: Date;
     @Output() dateChange = new EventEmitter();
     @Input() readonly: boolean;
+	@Input() view: string;
 
     public semanas: Array<any> = [];
     public verCalendario: boolean;
     public ano: number;
     public mes: number;
     public dia: number;
+
+	public trimestres: Array<any> = [];
 
     //public mesAnterior: Date;
     //public mesSiguiente: Date;
@@ -48,6 +51,9 @@ export class DatepickerComponent implements OnInit {
         this.dia = this.date.getDate();
 
 
+		this.view = (typeof this.view !== 'string') ? 'dia' : this.view;
+		this.view = (this.view.match(/^(dia|mes|ano)$/)) ? this.view : 'dia';
+
         // Ahora debemos calcular la vista del mes
         this.aplicar();
         this.calculaMes();
@@ -75,6 +81,28 @@ export class DatepickerComponent implements OnInit {
         this.aplicar();
         this.calculaMes();
     }
+
+	calculaTrimestres() {
+
+		this.trimestres = [];
+		const nom: Array<string> = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+		let i = 0;
+
+		for (let m = 0; m < 12; m++) {
+			if (m > 0 && m % 3 === 0) {
+				i++;
+			}
+
+			const fecha = new Date(this.ano, m, 1, 0, 0, 0, 0);
+			this.trimestres[i] = (typeof this.trimestres[i] === 'undefined') ? [] : this.trimestres[i];
+
+			this.trimestres[i].push({
+				valor: fecha,
+				texto: nom[m];
+			});
+		}
+	}
+
     calculaMes() {
         if (!this.date || this.date === null) {
             this.date = new Date();
@@ -121,6 +149,8 @@ export class DatepickerComponent implements OnInit {
         if (semana.length > 0) {
             this.semanas.push(semana);
         }
+
+		this.calculaTrimestres();
     }
 
     aplicar() {
@@ -150,6 +180,16 @@ export class DatepickerComponent implements OnInit {
         this.dateChange.emit(this.date);
         this.toggle(null);
     }
+
+	setMes(mes: Date) {
+		mes.setDate(1);
+		this.mes = mes.getMonth();
+		this.dia = 1;
+		this.date = mes;
+		this.aplicar();
+		this.dateChange.emit(this.date);
+		this.toggle(null);
+	}
 
     anoAnterior() {
         this.ano--;
@@ -211,6 +251,17 @@ export class DatepickerComponent implements OnInit {
         }
     }
 
+	claseMes(mes: Date) {
+		if (!this.date || this.date === null) {
+            return "diaFechaDatePicker";
+        }
+        if (this.date.getMonth() === mes.getMonth()) {
+            return "diaFechaDatePicker diaActivo";
+        } else {
+            return "diaFechaDatePicker";
+        }
+	}
+
 
     toggle(ev: any) {
         if (this.readonly === true) {
@@ -242,6 +293,7 @@ export class DatepickerComponent implements OnInit {
         const pos = this.cumulativeOffset(this.boton.nativeElement);
         const ancho = (this.boton.offsetWidth <= 200) ? 200 : this.boton.offsetWidth;
         const top = pos.top + this.boton.offsetHeight;
+
         return {
             "background-color": "white",
             "top": top + "px",

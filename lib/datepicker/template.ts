@@ -2,7 +2,7 @@
 
 export const TEMPLATE = `
     <style>
-    
+
     .flecha {
     border: solid black;
     border-width: 0 3px 3px 0;
@@ -38,14 +38,14 @@ export const TEMPLATE = `
         z-index:99;
         border: 1px solid #a0a0a0;
     }
-    
+
     tr.cabeceraTablaDatepicker {
         cursor:pointer;
         text-align:center;
         background-color: #e0e0e0;
         border-radius: 2px 2px 0 0;
     }
-    
+
     td.diaFechaDatePicker {
         /*border-radius: 25px;*/
         border: 1px solid #f0f0f0;
@@ -55,15 +55,15 @@ export const TEMPLATE = `
         vertical-align: middle;
         cursor:pointer;
     }
-    
+
     td.diaActivo {
         background-color: #e0e0e0;
     }
-    
+
     td.diaFechaDatePicker:hover {
         background-color: #f0f0f0;
     }
-    
+
     td.diaFechaDatePicker.activo {
         background-color: #e0e0e0;
     }
@@ -71,10 +71,13 @@ export const TEMPLATE = `
     <div style="position:relative;display:block;">
     <button #boton class="btn btn-primary" (click)="toggle($event)">
         <span *ngIf="!date || date === null">Selecciona la fecha</span>
-        <span *ngIf="date">{{date | date:'longDate'}}</span>
+        <span *ngIf="date && view === 'dia'">{{date | date:'longDate'}}</span>
+		<span *ngIf="date && view === 'mes'">{{date | date:'MMM, y'}}</span>
         <div class="pull-right" style="margin-left:10px;"><span class="glyphicon glyphicon-calendar"></span></div>
     </button>
-    <div *ngIf="verCalendario" class="cajaDatePicker" [ngStyle]="getEstiloCaja()">
+
+	<!-- CUANDO ESTAMOS EN LA VISTA DE DÍAS -->
+    <div *ngIf="verCalendario && view==='dia'" class="cajaDatePicker" [ngStyle]="getEstiloCaja()">
         <table class="table table-condensed table-striped" style="border-collapse:collapse;border:1px solid #e0e0e0; !important;">
             <thead>
                 <tr style="border:none;">
@@ -117,5 +120,37 @@ export const TEMPLATE = `
             <button class="btn btn-default btn-sm" (click)="toggle()">Cerrar</button>
         </div>
     </div>
+	<!-- FIN DE LA VISTA DE DÍAS -->
+
+	<!-- CUANDO ESTAMOS EN LA VISTA DE MESES -->
+	<div *ngIf="verCalendario && view==='mes'" class="cajaDatePicker" [ngStyle]="getEstiloCaja()">
+        <table class="table table-condensed table-striped" style="border-collapse:collapse;border:1px solid #e0e0e0; !important;">
+            <thead>
+                <tr style="border:none;">
+                    <td style="height:50px;vertical-align:middle;cursor:pointer;text-align:center;" (click)="anoAnterior()">
+                        <span class="flecha left"></span>
+                        <span class="flecha left"></span>
+                    </td>
+                    <td style="height:50px;vertical-align:middle;text-align:center;font-weight:bold;">
+                        {{date | date:'MMMM y'}}
+                    </td>
+                    <td style="height:50px;vertical-align:middle;cursor:pointer;text-align:center;" (click)="anoSiguiente()">
+                        <span class="flecha right"></span>
+                        <span class="flecha right"></span>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trimestre of trimestres;trackBy:index">
+                    <td style="min-width:70px;" *ngFor="let mes of trimestre;trackBy:index" [ngClass]="claseMes(mes.valor)" (click)="setMes(mes.valor)">{{mes.texto}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="btn-group" style="margin:10px;">
+            <button class="btn btn-danger btn-sm" (click)="quitaFecha()">Borrar</button>
+            <button class="btn btn-default btn-sm" (click)="toggle()">Cerrar</button>
+        </div>
+    </div>
+	<!-- FIN DE LA VISTA DE MESES -->
 </div>
 `;
