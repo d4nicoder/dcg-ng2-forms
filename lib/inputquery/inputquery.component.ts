@@ -19,6 +19,8 @@ export class InputQueryComponent implements AfterViewInit {
 
 	estiloCuadro: any = {};
 
+	scrollEv: boolean = false;
+
 	estilosItem: Array<any> = [];
 
 	@Input() multiple: boolean = false;
@@ -63,6 +65,11 @@ export class InputQueryComponent implements AfterViewInit {
 			return;
 		}
 
+		this.position = this.cumulativeOffset(this.buscador.nativeElement);
+
+		this.position.top = this.position.top - window.scrollY;
+		this.position.left = this.position.left - window.scrollX;
+
 		let altoInput = this.capa.offsetHeight;
 		let ancho = (this.capa.offsetWidth >= 200) ? this.capa.offsetWidth : 200;
 
@@ -102,6 +109,10 @@ export class InputQueryComponent implements AfterViewInit {
 		}
 
 		this.estiloCuadro = obj;
+	}
+
+	calculaPosicionCuadro() {
+		this.getEstilo();
 	}
 
 	private calculaEstilosItem(): any {
@@ -197,6 +208,13 @@ export class InputQueryComponent implements AfterViewInit {
 			return;
 		}
 
+		if (!this.scrollEv) {
+			this.scrollEv = true;
+			window.addEventListener('scroll', () => {
+				this.calculaPosicionCuadro();
+			});
+		}
+
 		this.inputQueryService.consultar(this.url, this.texto)
 			.subscribe((res) => {
 				// ya tenemos los resultados en res, vamos a almacenarlos para que se muestren en la vista
@@ -273,5 +291,9 @@ export class InputQueryComponent implements AfterViewInit {
 		this.value = [];
 		//this.valueChange.emit(this.value);
 		this.resultados = [];
+		window.removeEventListener('scroll', () => {
+			this.calculaPosicionCuadro();
+		});
+		this.scrollEv = false;
 	}
 }

@@ -59,6 +59,10 @@ export class DatepickerComponent implements OnInit {
     constructor() {
     }
 
+    calculaPosicion() {
+
+    }
+
     anoChange($event: any) {
 
     }
@@ -286,14 +290,20 @@ export class DatepickerComponent implements OnInit {
                 display: "none"
             };
         }
+        const scrollTop = window.scrollY;
+        const scrollLeft = window.scrollX;
+
         const pos = this.cumulativeOffset(this.boton.nativeElement);
+        const left = pos.left - scrollLeft;
         const ancho = (this.boton.offsetWidth <= 200) ? 200 : this.boton.offsetWidth;
-        const top = pos.top + this.boton.offsetHeight;
+        const altura = (typeof this.boton.nativeElement.offsetHeight === 'number') ? this.boton.nativeElement.offsetHeight : 0;
+        let top = pos.top + altura - scrollTop;
+
 
         return {
             "background-color": "white",
             "top": top + "px",
-            "left": pos.left + "px",
+            "left": left + "px",
             "width": ancho + "px"
         }
     }
