@@ -149,7 +149,7 @@ export class InputQueryComponent implements AfterViewInit {
 
 	onKey($event: any) {
 		this.position = this.cumulativeOffset($event.target);
-		this.texto = $event.target.value.toUpperCase();
+		this.texto = $event.target.value.trim();
 		this.capa = $event.target;
 
 		this.position.top = this.position.top - window.scrollY;
