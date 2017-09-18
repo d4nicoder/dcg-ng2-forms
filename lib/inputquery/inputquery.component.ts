@@ -11,7 +11,12 @@ import {TEMPLATE} from "./views/template";
 @Component({
 	selector: 'dcg-input-query',
 	template: TEMPLATE,
-	providers: [InputQueryService]
+	providers: [InputQueryService],
+	styles: [
+		`#cuadroResultados {
+				z-index: 100;
+		}`
+	]
 })
 export class InputQueryComponent implements AfterViewInit {
 
@@ -27,7 +32,8 @@ export class InputQueryComponent implements AfterViewInit {
 	@Input() realtime: boolean = false;
 	@Input() url: string;
 	@Input() value: Array<string>;
-	@Input() placeholder: string;
+	@Input() placeholder: string = '';
+	@Input() disabled: boolean = false;
 	@Input() remember: boolean = false;
 	@Input() inputClass: string;
 	@Input("allow-create") allowCreate: boolean = false;
@@ -89,7 +95,6 @@ export class InputQueryComponent implements AfterViewInit {
 				left: this.position.left + "px",
 				border:"1px solid #e0e0e0",
 				"background-color":"white",
-				"z-index": 100,
 				"overflow": "auto",
 				"max-height": "300px"
 			};
@@ -102,7 +107,6 @@ export class InputQueryComponent implements AfterViewInit {
 				left: this.position.left + "px",
 				border:"1px solid #e0e0e0",
 				"background-color":"white",
-				"z-index": 100,
 				"overflow": "auto",
 				"max-height": "300px"
 			};

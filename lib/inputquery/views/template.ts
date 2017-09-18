@@ -7,8 +7,8 @@
  */
 
 export const TEMPLATE = `
-<input type="text" #buscador class="form-control" [ngClass]="inputClass" (keyup)="onKey($event)">
-<div #cuadro [ngStyle]="estiloCuadro" *ngIf="resultados.length > 0">
+<input type="text" #buscador [disabled]="disabled" placeholder="{{ placeholder }}" class="form-control" [ngClass]="inputClass" (keyup)="onKey($event)">
+<div #cuadro [ngStyle]="estiloCuadro" *ngIf="resultados.length > 0" id="cuadroResultados">
     <table class="table table-hover">
         <tr *ngFor="let item of resultados;let i = index;">
             <td [ngStyle]="estilosItem[i]" (mouseover)="onHover(item)" (click)="seleccionar(item)">{{item.nombre}}</td>
