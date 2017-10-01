@@ -290,20 +290,18 @@ export class DatepickerComponent implements OnInit {
                 display: "none"
             };
         }
-        const scrollTop = window.scrollY;
-        const scrollLeft = window.scrollX;
-
-        const pos = this.cumulativeOffset(this.boton.nativeElement);
-        const left = pos.left - scrollLeft;
         const ancho = (this.boton.offsetWidth <= 200) ? 200 : this.boton.offsetWidth;
-        const altura = (typeof this.boton.nativeElement.offsetHeight === 'number') ? this.boton.nativeElement.offsetHeight : 0;
-        let top = pos.top + altura - scrollTop;
 
+
+        // Posicionamos an absolute
+        let btn = this.boton.nativeElement;
+        let izq = 0;
+        let arriba = btn.offsetHeight;
 
         return {
             "background-color": "white",
-            "top": top + "px",
-            "left": left + "px",
+            "top": arriba + "px",
+            "left": izq + "px",
             "width": ancho + "px"
         }
     }

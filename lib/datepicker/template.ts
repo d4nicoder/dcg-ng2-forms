@@ -39,6 +39,15 @@ export const TEMPLATE = `
         border: 1px solid #a0a0a0;
     }
 
+    #cajaDatePicker {
+        position: absolute;
+        display: block;
+        border-radius: 2px;
+        font-size:0.9em;
+        z-index:99;
+        border: 1px solid #a0a0a0;
+    }
+
     tr.cabeceraTablaDatepicker {
         cursor:pointer;
         text-align:center;
@@ -77,7 +86,7 @@ export const TEMPLATE = `
     </button>
 
 	<!-- CUANDO ESTAMOS EN LA VISTA DE DÍAS -->
-    <div *ngIf="verCalendario && view==='dia'" class="cajaDatePicker" [ngStyle]="getEstiloCaja()">
+    <div *ngIf="verCalendario && view==='dia'" [ngStyle]="getEstiloCaja()" id="cajaDatePicker">
         <table class="table table-condensed table-striped" style="border-collapse:collapse;border:1px solid #e0e0e0; !important;">
             <thead>
                 <tr style="border:none;">

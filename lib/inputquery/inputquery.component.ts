@@ -29,6 +29,7 @@ export class InputQueryComponent implements AfterViewInit {
 	estilosItem: Array<any> = [];
 
 	@Input() multiple: boolean = false;
+	@Input() data: Array<any> = null;
 	@Input() realtime: boolean = false;
 	@Input() url: string;
 	@Input() value: Array<string>;
@@ -217,6 +218,25 @@ export class InputQueryComponent implements AfterViewInit {
 			window.addEventListener('scroll', () => {
 				this.calculaPosicionCuadro();
 			});
+		}
+
+		if (this.data !== null && Array.isArray(this.data)) {
+			// Buscamos en local entre los resultados pasados por data
+			const resultados = [];
+			for (let i = 0; i < this.data.length; i++) {
+				if (this.data[i].nombre.match(this.texto, 'ig')) {
+					this.resultados.push({
+						nombre: this.data[i].nombre,
+						icono: this.data[i].icono || null,
+						avatar: this.data[i].avatar || null,
+						datos: this.data[i].datos
+					});
+				}
+			}
+
+			this.resultados = resultados;
+
+			return;
 		}
 
 		this.inputQueryService.consultar(this.url, this.texto)

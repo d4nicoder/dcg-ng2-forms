@@ -72,6 +72,8 @@ Este componente crea un input de tipo text en el que podremos introducir una cad
 - **[inputClass]**: Clase que se le pasará al <input>
 - **[realtime]**: Booleano que determina si se llamará a la api con cada pulsación de teclado. Es true por defecto. Si lo seteamos a false, se realizará la búsqueda cuando pulsemos intro.
 - **[url]**: Url a la que se enviará la consulta.
+- **[placeholder]**: Colocará un texto orientativo en el input
+- **[disabled]**: Permite activar o desactivar la escritura
 
 **Outputs del componente**
 - **(valueChange)**: Función que se llama cada vez que seleccionamos un resultado. Debemos pasar como argumento **$event**, que será el resultado.
